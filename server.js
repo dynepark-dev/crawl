@@ -10,31 +10,20 @@ const schedule = require("./schedule");
 app.use(cors({ origin: "*" }));
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+  res.send(`Hello World! Hello ${process.env.NAME}!`);
 });
 
 app.get("/length", cache(3000), async (req, res) => {
-    const [$, $webtoonList] = await getUpdatedList();
-    const length = $webtoonList.length;
-    res.send(`Naver Updates Length : ${length}`);
+  const [$, $webtoonList] = await getUpdatedList();
+  const length = $webtoonList.length;
+  res.send(`Naver Updates Length : ${length}`);
 });
 
-app.get("/webtoons", async (req, res) => {
-    const data = schedule.cache.get("/webtoons");
-    res.json({ data });
-});
-
-app.get("/count", async (req, res) => {
-    const data = schedule.cache.get("updatedCount");
-    console.log(data);
-    res.json({ data });
-});
-
-app.get("/test", (req, res) => {
-    console.log(schedule);
-    res.send("test");
+app.get("/webtoons", cache(3000), async (req, res) => {
+  const webtoons = await Update();
+  res.json(webtoons);
 });
 
 app.listen(PORT, () => {
-    console.log(`port: ${PORT}`);
+  console.log(`port: ${PORT}`);
 });

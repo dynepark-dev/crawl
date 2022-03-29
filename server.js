@@ -9,7 +9,7 @@ const cache = require("./routeCache");
 app.use(cors({ origin: "*" }));
 
 app.get("/", (req, res) => {
-  res.send("Hello World!!!!");
+  res.send(`Hello World! Hello ${process.env.NAME}!`);
 });
 
 app.get("/length", cache(3000), async (req, res) => {

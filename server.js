@@ -5,6 +5,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 const { getUpdatedList, Update } = require("./naver");
 const cache = require("./routeCache");
+const schedule = require("./schedule");
 
 app.use(cors({ origin: "*" }));
 

@@ -14,8 +14,6 @@ const getUpdatedList = async () => {
     const html = await getHTML(NaverURL);
     const $ = cheerio.load(html.data);
     const $webtoonList = $(".ico_updt");
-    const webtoonsLength = $webtoonList.length;
-    console.log(`Updated Naver webtoons: ${webtoonsLength}`);
     return [$, $webtoonList];
 };
 
@@ -51,7 +49,6 @@ const Update = async () => {
         webtoons[index].episodeTitle = episodeTitle;
         webtoons[index].episodeLink = episodeLink;
     }
-    console.table(webtoons);
     return webtoons;
 };
 
